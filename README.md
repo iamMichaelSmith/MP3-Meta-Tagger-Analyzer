@@ -1,6 +1,7 @@
 # MP3 Meta Tagger Analyzer
 
 An intelligent, local-first web application designed to streamline metadata tagging for sync licensing catalogs. Built to solve the tedious problem of manually categorizing music tracks, this tool leverages cutting-edge AI models to automatically extract comprehensive musical characteristics from MP3 files.
+<img width="3680" height="1837" alt="MP3 Meta Tagger Analyzer Image" src="https://github.com/user-attachments/assets/a7ff70b5-b900-4499-8f45-1d47341b021e" />
 
 ## Why This Project Exists
 
