@@ -284,3 +284,11 @@ MIT License - feel free to use for personal or commercial projects.
 - **Kong et al.** for PANNS
 - **Librosa** contributors for audio analysis tools
 - Built with ❤️ to solve real-world sync licensing workflow challenges
+
+## Employment Readiness
+This repository includes baseline standards to support hiring and delegation:
+- Clear onboarding in README/docs
+- CI checks for build/test/lint where applicable
+- Handoff/deploy checklist for repeatable operations
+- Secret-safe configuration via `.env.example` or platform secrets
+
