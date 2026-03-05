@@ -42,7 +42,7 @@ class AnalysisService:
             # BPM & Key
             onset_env = librosa.onset.onset_strength(y=y, sr=sr)
             tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
-            bpm = float(tempo)
+            bpm = float(np.atleast_1d(tempo)[0])
             
             chroma = librosa.feature.chroma_cqt(y=y, sr=sr)
             key_idx = np.argmax(np.mean(chroma, axis=1))

@@ -7,6 +7,8 @@ An intelligent, local-first web application designed to streamline metadata tagg
 
 Managing a sync licensing catalog requires detailed, accurate metadata for every track. Manually tagging hundreds or thousands of songs with BPM, key, genre, mood, and instrumentation is time-consuming and inconsistent. **MP3 Meta Tagger Analyzer** automates this entire workflow, using advanced machine learning models to analyze audio and generate professional-grade metadata ready for music licensing platforms like DISCO.AC.
 
+Supported upload formats: **MP3, WAV, FLAC, M4A**.
+
 This project has been instrumental in:
 - **Saving hours of manual tagging work** per session
 - **Ensuring consistent, AI-driven categorization** across entire catalogs

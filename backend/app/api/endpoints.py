@@ -10,8 +10,10 @@ router = APIRouter()
 @router.post("/upload", response_model=Track)
 async def upload_file(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
     # Validate extension
-    if not file.filename.lower().endswith('.mp3'):
-        raise HTTPException(status_code=400, detail="Only MP3 files are allowed")
+    allowed_ext = {'.mp3', '.wav', '.flac', '.m4a'}
+    lower_name = file.filename.lower()
+    if not any(lower_name.endswith(ext) for ext in allowed_ext):
+        raise HTTPException(status_code=400, detail="Supported formats: MP3, WAV, FLAC, M4A")
     
     track = await StorageService.save_upload(file)
     
