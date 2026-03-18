@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Download, CheckSquare, Square, FileOutput } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { CheckSquare, Square, FileOutput } from 'lucide-react';
 import { api, type Track } from '../api/client';
 import { cn } from '../lib/utils';
 

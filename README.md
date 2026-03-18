@@ -1,6 +1,31 @@
 # MP3 Meta Tagger Analyzer
 
 An intelligent, local-first web application designed to streamline metadata tagging for sync licensing catalogs. Built to solve the tedious problem of manually categorizing music tracks, this tool leverages cutting-edge AI models to automatically extract comprehensive musical characteristics from MP3 files.
+
+## Hiring manager snapshot
+
+This is one of the stronger portfolio pieces in the set because it combines:
+
+- applied ML for a real studio workflow, not just generic model demos
+- full-stack ownership across Python backend, React/TypeScript frontend, and optional AWS deployment
+- clear business framing around sync catalog preparation and batch metadata export
+- evidence of productization: Docker, SAM template, export workflow, environment expectations, and operator documentation
+
+## Proof artifacts
+
+- Local proof pack: `docs/LOCAL_PROOF.md`
+- Architecture: `docs/ARCHITECTURE.md`
+- Project outcomes: `docs/PROJECT_OUTCOMES.md`
+
+## Local verification status
+
+Validated during this pass:
+
+- `python -m pip install -r backend/requirements.txt` ✅ dependencies available on this machine
+- `python .\tests\smoke.py` ✅
+- `npm run build` in `ui` ✅ after removing a few unused imports/variables that were blocking TypeScript
+
+Main remaining blocker for employer-facing polish is not basic functionality, but proving one reproducible backend API or end-to-end analysis run with a sample file.
 <img width="3680" height="1837" alt="MP3 Meta Tagger Analyzer Image" src="https://github.com/user-attachments/assets/a7ff70b5-b900-4499-8f45-1d47341b021e" />
 
 ## Why This Project Exists

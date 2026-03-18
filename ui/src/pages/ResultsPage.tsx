@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Search, Music, Save, Copy, Check } from 'lucide-react';
 import { api, type Track } from '../api/client';
 import { cn } from '../lib/utils';
@@ -33,7 +33,6 @@ const ResultsPage = () => {
         setHasChanges(false);
     };
 
-    const selectedTrack = tracks.find(t => t.id === selectedId);
 
     const handleSave = async () => {
         if (!editingTrack) return;
