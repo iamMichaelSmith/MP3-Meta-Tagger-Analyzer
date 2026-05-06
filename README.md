@@ -141,12 +141,15 @@ This project has been instrumental in:
 
 4. **Run the application**:
    - **Windows**: Double-click `start.bat` in the root directory
+     - This launches:
+       - `start_backend.bat` on `http://localhost:8001`
+       - `start_frontend.bat` on `http://localhost:5173`
    - **Manual start**:
      ```bash
      # Terminal 1 - Backend
      cd backend
      venv\Scripts\activate
-     uvicorn app.main:app --reload --port 8000
+     uvicorn app.main:app --port 8001
      
      # Terminal 2 - Frontend
      cd ui
@@ -155,7 +158,7 @@ This project has been instrumental in:
    
    Access the application:
    - **Frontend**: http://localhost:5173
-   - **Backend API**: http://localhost:8000
+   - **Backend API**: http://localhost:8001
 
 ### Option 2: Docker Development
 
@@ -244,6 +247,27 @@ Perfect for **occasional use (2-3 times per week)** with approximately **$1-2/mo
 
 ## Configuration
 
+### Analysis Runtime Toggles
+
+For stability/performance tuning, the backend supports optional analyzer flags:
+
+- `ENABLE_CLAP` (default: `true`) - CLAP genre/mood/instrument inference
+- `ENABLE_ACOUSTID` (default: `false`) - Chromaprint/AcoustID lookup
+- `ENABLE_ESSENTIA` (default: `false`) - Essentia features
+- `CLAP_MAX_SECONDS` (default: `60`) - max audio seconds sent to CLAP
+
+Examples:
+
+```bash
+# Fastest local mode (BPM/key + lightweight flow)
+set ENABLE_CLAP=false
+set ENABLE_ACOUSTID=false
+set ENABLE_ESSENTIA=false
+
+# Keep CLAP but cap inference window
+set CLAP_MAX_SECONDS=45
+```
+
 ### Customizing Genre/Mood Mapping
 
 Edit `backend/mapping_rules.yaml` to define how CLAP model outputs map to your specific catalog categories:
@@ -268,6 +292,18 @@ moods:
 3. **Review**: Check generated BPM, key, genres, moods, instruments
 4. **Edit**: Adjust any tags as needed
 5. **Export**: Download CSV file formatted for DISCO.AC or other platforms
+
+## Troubleshooting
+
+If a file appears stuck at **ANALYZING**:
+
+1. Make sure frontend is running at `5173` and backend at `8001`.
+2. Restart with `start.bat` so `start_backend.bat` can clean existing `8001` listeners.
+3. Test one file first, then batch uploads.
+4. If needed, temporarily disable optional analyzers with:
+   - `ENABLE_ACOUSTID=false`
+   - `ENABLE_ESSENTIA=false`
+5. If still slow, lower CLAP work with `CLAP_MAX_SECONDS=30`.
 
 ## Project Structure
 
