@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/api';
+// Use a dedicated backend port to avoid collisions with stale local servers.
+const API_URL = 'http://127.0.0.1:8001/api';
 
 export const client = axios.create({
     baseURL: API_URL,

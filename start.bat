@@ -1,15 +1,17 @@
 @echo off
 echo Starting MP3 Meta Tagger Analyzer...
+echo.
 
-cd backend
-start "Backend Server" cmd /k "venv\Scripts\activate && uvicorn app.main:app --reload --port 8000"
-cd ..
+rem Convert to short path to avoid issues with special characters like ^& in folder names
+for %%I in ("%~dp0.") do set "SAFE_DIR=%%~sI"
 
-cd ui
-start "Frontend Client" cmd /k "npm run dev"
-cd ..
+start "Backend Server" cmd /k "%SAFE_DIR%\start_backend.bat"
+start "Frontend Client" cmd /k "%SAFE_DIR%\start_frontend.bat"
 
 echo Services started!
-echo Backend: http://localhost:8000
+echo Backend: http://localhost:8001
 echo Frontend: http://localhost:5173
+echo.
+echo Close this window anytime - the servers will keep running.
+echo To stop the servers, close their individual windows.
 pause

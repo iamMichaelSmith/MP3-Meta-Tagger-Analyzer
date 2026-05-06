@@ -31,7 +31,7 @@ const UploadPage = () => {
 
             // Start polling for analysis status
             setQueue(prev => prev.map(item =>
-                item.id === fileItem.id ? { ...item, status: 'analyzing', progress: 100, trackId: uploadedTrack.id } : item
+                item.id === fileItem.id ? { ...item, status: 'analyzing', progress: 70, trackId: uploadedTrack.id } : item
             ));
 
             // Poll every 2 seconds until analysis is complete
@@ -47,7 +47,7 @@ const UploadPage = () => {
         }
     };
 
-    const pollTrackStatus = async (fileItemId: string, trackId: string) => {
+    const pollTrackStatus = async (fileItemId: string, trackId: string, pollErrors = 0) => {
         try {
             const track = await api.getTrack(trackId);
 
@@ -60,11 +60,26 @@ const UploadPage = () => {
                     item.id === fileItemId ? { ...item, status: 'error', errorMessage: 'Analysis failed' } : item
                 ));
             } else {
+                // We only have upload byte progress, so use a capped synthetic progress while backend analyzes.
+                setQueue(prev => prev.map(item => {
+                    if (item.id !== fileItemId) return item;
+                    const next = Math.min(95, Math.max(item.progress, 70) + 3);
+                    return { ...item, status: 'analyzing', progress: next };
+                }));
                 // Still analyzing, poll again in 2 seconds
-                setTimeout(() => pollTrackStatus(fileItemId, trackId), 2000);
+                setTimeout(() => pollTrackStatus(fileItemId, trackId, 0), 2000);
             }
         } catch (error) {
             console.error("Polling error:", error);
+            if (pollErrors < 5) {
+                setTimeout(() => pollTrackStatus(fileItemId, trackId, pollErrors + 1), 2000);
+                return;
+            }
+            setQueue(prev => prev.map(item =>
+                item.id === fileItemId
+                    ? { ...item, status: 'error', errorMessage: 'Lost connection while checking analysis status' }
+                    : item
+            ));
         }
     };
 
@@ -216,7 +231,7 @@ const UploadPage = () => {
                                                 item.status === 'error' ? "bg-red-500" : "bg-gold",
                                                 item.status === 'analyzing' ? "animate-pulse" : ""
                                             )}
-                                            style={{ width: item.status === 'analyzing' ? '100%' : `${item.progress}%` }}
+                                            style={{ width: `${item.progress}%` }}
                                         />
                                     </div>
 
